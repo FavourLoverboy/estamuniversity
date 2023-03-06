@@ -1,0 +1,96 @@
+body{
+    align-items: center;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    display: flex;
+    font-family: 'Jost', sans-serif;
+    justify-content: center;
+    margin: 0;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.main{
+    background: url("../images/img.jpg") no-repeat center / cover;
+    border-radius: 10px;
+    box-shadow: 5px 20px 50px #000;
+    height: 500px;
+    overflow: hidden;
+    width: 350px;
+}
+#chk{
+    display: none;
+}
+.signup{
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+label{
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    font-size: 2.3em;
+    font-weight: bold;
+    justify-content: center;
+    margin: 60px;
+    transition: .5s ease-in-out;
+}
+input{
+    background: #e0dede;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    height: 20px;
+    justify-content: center;
+    margin: 20px auto 0 auto;
+    outline: none;
+    padding: 10px;
+    width: 60%;
+}
+span{
+    color: rgb(241, 66, 66);
+    margin: auto 60px;
+}
+button{
+    background: #573b8a;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 1em;
+    font-weight: bold;
+    height: 40px;
+    justify-content: center;
+    margin: 10px auto;
+    margin-top: 20px;
+    outline: none;
+    transition: .2s ease-in;
+    width: 60%;
+}
+button:hover{
+    background: #6d44b8;
+}
+.login{
+    background: #eee;
+    border-radius: 60% / 10%;
+    height: 460px;
+    transform: translateY(-180px);
+    transition: .8s ease-in-out;
+}
+.login label{
+    color: #573b8a;
+    transform: scale(.6);
+}
+
+#chk:checked ~ .login{
+    transform: translateY(-500px);
+}
+
+#chk:checked ~ .login label{
+    transform: scale(1);
+}
+
+#chk:checked ~ .signup label{
+    transform: scale(.6);
+}
