@@ -34,7 +34,7 @@
                                 ':email' => htmlspecialchars($email), 
                                 ':password' => htmlspecialchars($encryptPassword), 
                                 ':level' => htmlspecialchars($task),
-                                ':date' => htmlspecialchars($task),
+                                ':date' => date('Y-m-d'),
                                 ':status' => '1'
                             );
                             $insert = $connect->tbl_insert($tblquery,$tblvalue);
@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-lg-3">
                     Middle Name <br/>
-                    <input type="text" name="mname" class="form-control" value="<?php echo $mname; ?>" required>
+                    <input type="text" name="mname" class="form-control" value="<?php echo $mname; ?>">
                 </div>
                 <div class="col-lg-3">
                     Email <br/>

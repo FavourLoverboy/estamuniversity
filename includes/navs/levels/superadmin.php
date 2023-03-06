@@ -65,5 +65,6 @@
         <a href="addstaff" class="link">Add Staff</a>
         <a href="changepassword" class="link">Change Password</a>
         <a href="#" class="link">Personal Data</a>
+        <a href="staffs" class="link">Staffs</a>
     </div>
 </li>
