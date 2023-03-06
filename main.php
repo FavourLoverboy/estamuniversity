@@ -1,10 +1,10 @@
 <?php
     session_start();
     if(!$_SESSION['myId']){
-        // header('location: /estamuniversity/');
+        header('location: /estamuniversity/');
     }
 
-    $dir = 'schoolhenry';
+    $dir = 'estamuniversity';
 
     $superAdmin = 'superadmin';
     $studentAdmin = 'studentadmin';
@@ -41,5 +41,18 @@
 ?>
 
 <?php include('includes/main/header.php'); ?>
-    <?php include($page); ?>
+    <?php include('includes/navs/sidebar.php'); ?>
+    <!-- home -->
+    <section class="home">
+        <div class="toggle-sidebar">
+            <i class="bx bx-menu"></i>
+            <div class="text">Menu</div>
+        </div>
+
+        <div>
+            <div style='margin: 10px auto;width: calc(100% - 40px);'>
+                <?php include($page); ?>
+            </div>
+        </div>
+    </section>
 <?php include ('includes/main/footer.php'); ?>

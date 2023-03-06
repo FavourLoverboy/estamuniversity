@@ -38,7 +38,6 @@
                         );
                         $statusCheck = $connect->tbl_select($tblquery, $tblvalue);
                         if($statusCheck){
-                            echo "done";
                             foreach($statusCheck as $data){
                                 extract($data);
                                 $_SESSION['myId'] = $id;

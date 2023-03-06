@@ -1,3 +1,229 @@
-body{
-    background-color: aqua;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+:root{
+    --color_Blue: #3f93f1;
+    --color_Dark1: #1e1e1e;
+    --color_Dark2: #252527;
+    --color_Light1: #dfdfdf;
+    --color_Light2: #c4c4c4;
+}
+
+/* ========================= */
+.sidebar{
+    background: var(--color_Dark1);
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: all .5s ease;
+    width: 260px;
+    z-index: 100;
+}
+.sidebar.close{
+    width: 78px;
+}
+.logo-box{
+    align-items: center;
+    color: var(--color_Light1);
+    display: flex;
+    height: 60px;
+    transition: all .5s ease;
+    width: 100%;
+}
+.logo-box:hover{
+    color: var(--color_Blue);
+}
+.login-box i{
+    font-size: 30px;
+    height: 50px;
+    line-height: 50px;
+    min-width: 78px;
+    text-align: center;
+    transition: all .5s ease;
+}
+.sidebar.close .logo-box i{
+    transform: rotate(360deg);
+}
+.logo-name{
+    font-size: 22px;
+    font-weight: 600;
+}
+.sidebar-list{
+    height: 100%;
+    overflow: auto;
+    padding: 30px 0 150px 0;
+}
+.sidebar-list::-webkit-scrollbar{
+    display: none;
+}
+.sidebar-list li{
+    transition: all .5s ease;
+}
+.sidebar-list li:hover{
+    background: var(--color_Dark2);
+}
+.sidebar-list li .title{
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    transition: all .5s ease;
+}
+.sidebar-list li.active .title{
+    background: var(--color_Blue);
+}
+.sidebar-list li.active .bxs-chevron-down{
+    transform: rotate(180deg);
+    transition: all .5s ease;
+}
+.sidebar-list li .title .link{
+    align-items: center;
+    display: flex;
+}
+.sidebar-list li .title i{
+    color: var(--color_Light1);
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    min-width: 70px;
+    text-align: center;
+}
+.sidebar-list li .title .name{
+    color: var(--color_Light1);
+    font-size: 18px;
+    font-weight: 400;
+}
+.sidebar-list li .submenu{
+    height: 0;
+    opacity: 0;
+    transition: all .5s ease;
+    width: 0;
+}
+.sidebar-list li.dropdown.active .submenu{
+    background: var(--color_Dark2);
+    display: flex;
+    flex-direction: column;
+    height: unset;
+    opacity: 1;
+    padding: 6px 6px 14px 80px;
+    width: unset;
+}
+.submenu .link{
+    color: var(--color_Light2);
+    font-size: 15px;
+    padding: 5px 0;
+    transition: all .5s ease;
+}
+.submenu .link:hover{
+    color: #fff;
+}
+.submenu-title{
+    display: none;
+}
+/* submenu close */
+.sidebar.close .logo-name,
+.sidebar.close .title .name,
+.sidebar.close .bxs-chevron-down{
+    display: none;
+}
+.sidebar.close .sidebar-list{
+    overflow: visible;
+}
+.sidebar.close .sidebar-list li{
+    position: relative;
+}
+.sidebar.close .sidebar-list li .submenu{
+    border-radius: 0 6px 6px 0;
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    margin-top: 0;
+    opacity: 0;
+    padding: 10px 20px;
+    pointer-events: none;
+    position: absolute;
+    left: 100%;
+    top: -10px;
+    transition: all .5s ease;
+    width: max-content;
+}
+.sidebar.close .sidebar-list li:hover .submenu{
+    background: var(--color_Dark2);
+    opacity: 1;
+    pointer-events: inherit;
+    top: 0;
+}
+.sidebar.close .submenu-title{
+    color: var(--color_Light1);
+    display: block;
+    font-size: 18px;
+}
+
+/* home */
+.home{
+    background: var(--color_Light1);
+    height: 100vh;
+    position: relative;
+    left: 260px;
+    transition: all .5s ease;
+    width: calc(100% - 260px);
+}
+.sidebar.close ~ .home{
+    left: 78px;
+    width: calc(100% - 78px);
+}
+.home .toggle-sidebar{
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    height: 60px;
+    width: fit-content;
+}
+.home .toggle-sidebar i{
+    color: var(--color_Dark1);
+    font-size: 35px;
+    margin-left: 15px;
+}
+.home .toggle-sidebar .text{
+    color: var(--color_Dark1);
+    font-size: 25px;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* = Responsive = */
+@media (max-width: 1080px){
+    
+}
+
+/* = Responsive = */
+@media (max-width: 774px){
+
+}
+
+@media (max-width: 564px){
+
 }
