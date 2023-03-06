@@ -1,3 +1,10 @@
+<?php 
+    include("config/db.php");
+    include("config/security.php");
+    $connect = new DB();
+    $security = new Security();
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,8 +15,11 @@
 
         <!-- box icons -->
         <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
+
         <!-- styles -->
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/main.css">
+        
     </head>
     <body>
     

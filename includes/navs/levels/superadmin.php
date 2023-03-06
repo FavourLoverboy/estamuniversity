@@ -62,8 +62,8 @@
     </div>
     <div class="submenu">
         <a href="#" class="link submenu-title">Settings</a>
-        <a href="#" class="link">Add Staff</a>
-        <a href="#" class="link">Change Password</a>
+        <a href="addstaff" class="link">Add Staff</a>
+        <a href="changepassword" class="link">Change Password</a>
         <a href="#" class="link">Personal Data</a>
     </div>
 </li>
