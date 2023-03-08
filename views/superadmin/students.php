@@ -149,8 +149,11 @@
                                 <td>$sex</td>
                                 <td>
                                     <form action='' method='post'>
-                                        <input type='hidden' name='id' value='$id'>
+                                        <input type='hidden' name='stu_id' value='$id'>
                                         <input type='hidden' name='stu_name' value='$lname $fname $mname'>
+                                        <input type='hidden' name='stu_lname' value='$lname'>
+                                        <input type='hidden' name='stu_fname' value='$fname'>
+                                        <input type='hidden' name='stu_mname' value='$mname'>
                                         <input type='hidden' name='stu_img' value='$passport'>
                                         <input type='hidden' name='stu_regno' value='$regno'>
                                         <input type='hidden' name='stu_level' value='$level'>
@@ -196,7 +199,11 @@
 
     if($_POST['view']){
         extract($_POST);
+        $_SESSION['stu_id'] = $stu_id;
         $_SESSION['stu_name'] = $stu_name;
+        $_SESSION['stu_lname'] = $stu_lname;
+        $_SESSION['stu_fname'] = $stu_fname;
+        $_SESSION['stu_mname'] = $stu_mname;
         $_SESSION['stu_img'] = $stu_img;
         $_SESSION['stu_regno'] = $stu_regno;
         $_SESSION['stu_course'] = $stu_course;

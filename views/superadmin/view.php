@@ -3,7 +3,35 @@
         <?php //echo $_SESSION['stu_name']; ?>
     <!-- </h3> -->
 
+    <div class="row">
+        <?php
+        
+            if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'SA'){
+                echo "
+                    <div class=col-3>
+                        <a href='editstudent' class='btn btn-warning'>Edit student details</a>
+                    </div>
+                ";
+            }
+            if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'PA'){
+                echo "
+                    <div class=col-3>
+                        <a href='' class='btn btn-primary'>Add payment</a>
+                    </div>
+                ";
+            }
+            if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'RA'){
+                echo "
+                    <div class=col-3>
+                        <a href='' class='btn btn-info'>Add result</a>
+                    </div>
+                ";
+            }
+        
+        ?>
+    </div>
 
+    <hr>
     <div class="row">
         <div class="col-3">
             <img src='../uploads/<?php echo $_SESSION['stu_folder'] . '/' . $_SESSION['stu_img']; ?>' style="height: 100%; width:100%; border-radius:5px;">
