@@ -150,12 +150,34 @@
                                 <td>
                                     <form action='' method='post'>
                                         <input type='hidden' name='id' value='$id'>
-                                        <input type='submit' name='removedeg' class='btn btn-sm btn-info' value='see more ...'>
+                                        <input type='hidden' name='stu_name' value='$lname $fname $mname'>
+                                        <input type='hidden' name='stu_img' value='$passport'>
+                                        <input type='hidden' name='stu_regno' value='$regno'>
+                                        <input type='hidden' name='stu_level' value='$level'>
+                                        <input type='hidden' name='stu_course' value='$course'>
+                                        <input type='hidden' name='stu_mol' value='$mol'>
+                                        <input type='hidden' name='stu_session' value='$session'>
+                                        <input type='hidden' name='stu_degree' value='$degree'>
+                                        <input type='hidden' name='stu_email' value='$email'>
+                                        <input type='hidden' name='stu_folder' value='$folder'>
+                                        <input type='hidden' name='stu_sex' value='$sex'>
+                                        <input type='hidden' name='stu_dob' value='$dob'>
+                                        <input type='hidden' name='stu_state' value='$state'>
+                                        <input type='hidden' name='stu_lga' value='$lga'>
+                                        <input type='hidden' name='stu_nationality' value='$nationality'>
+                                        <input type='hidden' name='stu_num' value='$num'>
+                                        <input type='hidden' name='stu_password' value='$password'>
+                                        <input type='hidden' name='stu_address' value='$c_address'>
+                                        <input type='hidden' name='stu_city' value='$c_city'>
+                                        <input type='hidden' name='stu_cstate' value='$c_state'>
+                                        <input type='hidden' name='stu_country' value='$c_country'>
+                                        <input type='hidden' name='stu_files' value='$files'>
+                                        <input type='submit' name='view' class='btn btn-sm btn-info' value='see more ...'>
                                     </form>
                                 </td>
                             </tr>
                         "; 
-                        $sn++;  
+                        $sn++;
                     }
                 }else{
                     echo "
@@ -170,3 +192,33 @@
     </table>
 </div>
 
+<?php
+
+    if($_POST['view']){
+        extract($_POST);
+        $_SESSION['stu_name'] = $stu_name;
+        $_SESSION['stu_img'] = $stu_img;
+        $_SESSION['stu_regno'] = $stu_regno;
+        $_SESSION['stu_course'] = $stu_course;
+        $_SESSION['stu_level'] = $stu_level;
+        $_SESSION['stu_mol'] = $stu_mol;
+        $_SESSION['stu_session'] = $stu_session;
+        $_SESSION['stu_degree'] = $stu_degree;
+        $_SESSION['stu_email'] = $stu_email;
+        $_SESSION['stu_folder'] = $stu_folder;
+        $_SESSION['stu_sex'] = $stu_sex;
+        $_SESSION['stu_dob'] = $stu_dob;
+        $_SESSION['stu_state'] = $stu_state;
+        $_SESSION['stu_lga'] = $stu_lga;
+        $_SESSION['stu_nationality'] = $stu_nationality;
+        $_SESSION['stu_num'] = $stu_num;
+        $_SESSION['stu_password'] = $stu_password;
+        $_SESSION['stu_address'] = $stu_address;
+        $_SESSION['stu_city'] = $stu_city;
+        $_SESSION['stu_cstate'] = $stu_cstate;
+        $_SESSION['stu_country'] = $stu_country;
+        $_SESSION['stu_files'] = $stu_files;
+        echo "<script>  window.location='view' </script>";
+    }
+
+?>

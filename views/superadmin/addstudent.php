@@ -25,7 +25,7 @@
             //Get the Name of the Uploaded File
             $pport = uniqid() . $_FILES['passport']['name'];
 
-            $allowed = array('png', 'jpg', 'jpeg');
+            $allowed = array('png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG');
             $ext = pathinfo($pport, PATHINFO_EXTENSION);
 
             // Validating Email
@@ -90,7 +90,7 @@
             foreach($_FILES['image']['tmp_name'] as $key => $value) {
                 $fileNames = uniqid() . $_FILES['image']['name'][$key];
                 $fi = $_FILES['image']['name'][$key];
-                $arrayValue = uniqid() . $_FILES['image']['name'][$key];
+                $arrayValue = $fileNames;
                 $fileName_tmp = $_FILES['image']['tmp_name'][$key];
                 $extMul = pathinfo($fileNames, PATHINFO_EXTENSION);
                 
