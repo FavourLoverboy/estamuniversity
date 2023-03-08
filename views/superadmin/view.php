@@ -16,7 +16,7 @@
             if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'PA'){
                 echo "
                     <div class=col-3>
-                        <a href='' class='btn btn-primary'>Add payment</a>
+                        <a href='payment' class='btn btn-primary'>Add payment</a>
                     </div>
                 ";
             }
@@ -183,5 +183,53 @@
             }
         
         ?>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <table class='table table-bordered' style='font-family: Arial; font-size: 15px;'>
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Item</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    
+                        
+                    
+                    ?>
+                    <tr>
+                        <td>
+                            <h6>Course</h6>
+                            <?php echo $_SESSION['stu_course']; ?>
+                        </td>
+                        <td>
+                            <h6>Degree</h6>
+                            <?php echo $_SESSION['stu_degree']; ?>
+                        </td>
+                        <td>
+                            <h6>Session</h6>
+                            <?php echo $_SESSION['stu_session']; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6>Level</h6>
+                            <?php echo $_SESSION['stu_level']; ?>
+                        </td>
+                        <td>
+                            <h6>Method</h6>
+                            <?php echo $_SESSION['stu_mol']; ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

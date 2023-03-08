@@ -20,7 +20,7 @@
     </div>
     <div class="submenu">
         <a href="#" class="link submenu-title">Payment</a>
-        <a href="#" class="link">Add</a>
+        <a href="pay" class="link">Add</a>
         <a href="#" class="link">History</a>
     </div>
 </li>
@@ -34,7 +34,7 @@
     </div>
     <div class="submenu">
         <a href="#" class="link submenu-title">Result</a>
-        <a href="#" class="link">Add</a>
+        <a href="" class="link">Add</a>
         <a href="#" class="link">Results</a>
     </div>
 </li>
@@ -64,8 +64,8 @@
         <a href="#" class="link submenu-title">Settings</a>
         <a href="addstaff" class="link">Add Staff</a>
         <a href="changepassword" class="link">Change Password</a>
-        <!-- <a href="#" class="link">Personal Data</a> -->
+        <a href="paymentdetails" class="link">Payment Settings</a>
         <a href="staffs" class="link">Staffs</a>
-        <a href="update" class="link">Update</a>
+        <a href="update" class="link">Study Details</a>
     </div>
 </li>
