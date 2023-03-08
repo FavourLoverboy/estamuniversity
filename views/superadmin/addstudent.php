@@ -20,6 +20,7 @@
 
             $_SESSION['validate_email'] = true;
             $encryptPassword = $security->encodeMsg($password);
+            $folder = uniqid();
 
             //Get the Name of the Uploaded File
             $pport = uniqid() . $_FILES['passport']['name'];
@@ -97,11 +98,11 @@
                     array_push($credentials, $arrayValue);
                     if(in_array($extMul, $allowed)){
                         if($status){
-                            if(!is_dir("uploads/" . $email)){
-                                mkdir("uploads/" . $email, 0777, true);
+                            if(!is_dir("uploads/" . $folder)){
+                                mkdir("uploads/" . $folder, 0777, true);
                             }
                             // Choose where to save the Upload File 
-                            $location = "uploads/$email/".$fileNames;
+                            $location = "uploads/$folder/".$fileNames;
 
                             // Save the uploaded File to the local file system
                             move_uploaded_file($fileName_tmp, $location);
@@ -114,16 +115,16 @@
             }
             
             if($status){
-                if(!is_dir("uploads/" . $email)){
-                    mkdir("uploads/" . $email, 0777, true);
+                if(!is_dir("uploads/" . $folder)){
+                    mkdir("uploads/" . $folder, 0777, true);
                 }
                 // Choose where to save the Upload File 
-                $location = "uploads/$email/".$pport;
+                $location = "uploads/$folder/".$pport;
                 // Save the uploaded File to the local file system
                 move_uploaded_file($_FILES['passport']['tmp_name'], $location);
 
 
-                $tblquery = "INSERT INTO students VALUES(:id, :regno, :lname, :fname, :mname, :sex, :dob, :state, :lga, :nationality, :num, :email, :password, :c_address, :c_city, :c_state, :c_country, :degree, :course, :mol, :level, :session, :passport, :files, :date, :status)";
+                $tblquery = "INSERT INTO students VALUES(:id, :regno, :lname, :fname, :mname, :sex, :dob, :state, :lga, :nationality, :num, :email, :password, :c_address, :c_city, :c_state, :c_country, :degree, :course, :mol, :level, :session, :passport, :files, :date, :status, :folder)";
                 
                 $totalValue = sizeof($credentials);
                 $newFiles = '';
@@ -158,6 +159,7 @@
                     ':files' => $newFiles,
                     ':date' => date('Y-m-d'),
                     ':status' => '1',
+                    ':folder' => $folder
                 );
                 $insert = $connect->tbl_insert($tblquery,$tblvalue);
                 if($insert){

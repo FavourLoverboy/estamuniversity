@@ -49,7 +49,7 @@
     <div class="submenu">
         <a href="#" class="link submenu-title">Student</a>
         <a href="addstudent" class="link">Add</a>
-        <a href="#" class="link">Students</a>
+        <a href="students" class="link">Students</a>
     </div>
 </li>
 <li class="dropdown">
