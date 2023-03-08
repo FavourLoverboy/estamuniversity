@@ -8,6 +8,9 @@
     padding: 0;
     text-decoration: none;
 }
+a{
+    text-decoration: none;
+}
 span.main{
     color: rgb(241, 66, 66);
 }
@@ -174,7 +177,7 @@ span.main{
 /* home */
 .home{
     background: var(--color_Light1);
-    height: 100vh;
+    /* height: 100vh; */
     position: relative;
     left: 260px;
     transition: all .5s ease;

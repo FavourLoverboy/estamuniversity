@@ -48,7 +48,7 @@
     </div>
     <div class="submenu">
         <a href="#" class="link submenu-title">Student</a>
-        <a href="#" class="link">Add</a>
+        <a href="addstudent" class="link">Add</a>
         <a href="#" class="link">Students</a>
     </div>
 </li>
@@ -64,7 +64,8 @@
         <a href="#" class="link submenu-title">Settings</a>
         <a href="addstaff" class="link">Add Staff</a>
         <a href="changepassword" class="link">Change Password</a>
-        <a href="#" class="link">Personal Data</a>
+        <!-- <a href="#" class="link">Personal Data</a> -->
         <a href="staffs" class="link">Staffs</a>
+        <a href="update" class="link">Update</a>
     </div>
 </li>
