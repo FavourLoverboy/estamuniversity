@@ -35,7 +35,7 @@
     <div class="submenu">
         <a href="#" class="link submenu-title">Result</a>
         <a href="re" class="link">Add</a>
-        <a href="#" class="link">Results</a>
+        <a href="resulthistory" class="link">Results</a>
     </div>
 </li>
 <li class="dropdown">
