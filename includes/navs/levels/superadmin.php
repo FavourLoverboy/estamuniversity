@@ -21,7 +21,7 @@
     <div class="submenu">
         <a href="#" class="link submenu-title">Payment</a>
         <a href="pay" class="link">Add</a>
-        <a href="#" class="link">History</a>
+        <a href="paymenthistory" class="link">Payments</a>
     </div>
 </li>
 <li class="dropdown">
