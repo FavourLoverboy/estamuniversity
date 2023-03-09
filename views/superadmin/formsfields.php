@@ -16,7 +16,7 @@
                 $tblquery = "INSERT INTO morefields VALUES(:id, :name, :content, :type)";
                 $tblvalue = array(
                     ':id' => NULL, 
-                    ':name' => htmlspecialchars(uniqid()), 
+                    ':name' => htmlspecialchars('var' . uniqid()), 
                     ':content' => htmlspecialchars(ucwords($field)), 
                     ':type' => "S"
                 );
@@ -112,7 +112,7 @@
                 $tblquery = "INSERT INTO morefields VALUES(:id, :name, :content, :type)";
                 $tblvalue = array(
                     ':id' => NULL, 
-                    ':name' => htmlspecialchars(uniqid()), 
+                    ':name' => htmlspecialchars('var' . uniqid()), 
                     ':content' => htmlspecialchars(ucwords($payment)), 
                     ':type' => "P"
                 );

@@ -3,7 +3,7 @@
     <?php echo $_SESSION['stu_name']; ?>
     <hr />
     <?php 
-        if($_POST){
+        if($_POST['add']){
             
             extract($_POST);
 
@@ -15,7 +15,25 @@
             );
             $paymentCheck = $connect->tbl_select($tblquery, $tblvalue);
             if(!$paymentCheck){
-                $tblquery = "INSERT INTO payment VALUES(:id, :stu_id, :addedby, :level, :item, :amount, :tid, :pm, :note, :date)";
+                // getting additional field value
+                $allFields = array();
+                $tblquery = "SELECT * FROM morefields WHERE type = :type";
+                $tblvalue = array(
+                    ':type' => 'P'
+                );
+                $select = $connect->tbl_select($tblquery,$tblvalue);
+                foreach($select as $data){
+                    extract($data);
+                    array_push($allFields, $name); 
+                }
+
+                $allMore = '';
+                foreach($allFields as $data){
+                    $a = "$data";
+                    $allMore .= htmlspecialchars($$a . '?* ');
+                }
+                $allMore = rtrim($allMore, "?* ");
+                $tblquery = "INSERT INTO payment VALUES(:id, :stu_id, :addedby, :level, :item, :amount, :tid, :pm, :note, :more, :date)";
                 $tblvalue = array(
                     ':id' => NULL, 
                     ':stu_id' => htmlspecialchars($_SESSION['stu_id']),
@@ -26,12 +44,14 @@
                     ':tid' => htmlspecialchars($tid),
                     ':pm' => htmlspecialchars($pm),
                     ':note' => htmlspecialchars($note),
+                    ':more' => $allMore,
                     ':date' => htmlspecialchars($date)
                 );
                 $insert = $connect->tbl_insert($tblquery,$tblvalue);
                 if($insert){
                     echo "<p class='text-success'>payment added</p>";
                     $level = $item = $amount = $tid = $pm = $note = $date = '';
+                    $enter = true;
                 }
             }else{
                 echo "<p class='text-danger'>payment already made</p>";
@@ -102,8 +122,31 @@
             </div>
             <div class="col-lg-6">
                 Note <br />
-                <textarea name="note" class="form-control"><?php echo $note; ?></textarea>
+                <textarea name="note" rows="1" class="form-control"><?php echo $note; ?></textarea>
             </div>
+            <?php
+            
+                $tblquery = "SELECT * FROM morefields WHERE type = :type";
+                $tblvalue = array(
+                    ':type' => 'P'
+                );
+                $select = $connect->tbl_select($tblquery,$tblvalue);
+                foreach($select as $data){
+                    extract($data);
+                    if(!$enter){
+                        $a = "$name";
+                        $abc = $$a;
+                    }
+                    
+                    echo "
+                        <div class='col-lg-3'>
+                            $content <br/>
+                            <input type='text' name='$name' value='$abc' class='form-control'>
+                        </div>
+                    ";    
+                }
+            
+            ?>
             <div class="col-lg-3">
                 <br />
                 <input type="submit" name="add" class="btn btn-primary" value="Add Payment">
@@ -125,6 +168,31 @@
                         <th>Item</th>
                         <th>Amount</th>
                         <th>Method</th>
+                        <?php
+            
+                            $tblquery = "SELECT * FROM morefields WHERE type = :type";
+                            $tblvalue = array(
+                                ':type' => 'P'
+                            );
+                            $select = $connect->tbl_select($tblquery,$tblvalue);
+                            
+                            if($select){
+                                $selected = true; 
+                                $numV = sizeof($select);
+                                foreach($select as $data){
+                                    extract($data);
+                                    if(!$enter){
+                                        $a = "$name";
+                                        $abc = $$a;
+                                    }
+                                    
+                                    echo "
+                                        <th>$content</th>
+                                    ";    
+                                }
+                            }
+                        
+                        ?> 
                         <th>Date</th>
                     </tr>
                 </thead>
@@ -157,6 +225,7 @@
                             $snE = 0;
                             foreach($select as $data){
                                 extract($data);
+                                $moreFields = explode('?* ', $more);
                                 echo "
                                     <tr>
                                         <td>$sn</td>
@@ -164,6 +233,24 @@
                                         <td>$item</td>
                                         <td>$amount</td>
                                         <td>$pm</td>
+                                ";
+                                        $numV;
+                                        if($selected){
+                                            for($i = 0; $i < $numV; $i++){
+                                                if($moreFields[$i]){
+                                                    echo "
+                                                        <td>$moreFields[$i]</td>
+                                                    ";
+                                                }else{
+                                                    echo "
+                                                        <td>-</td>
+                                                    ";
+                                                }
+                                            }
+                                            
+                                        }
+                                    
+                                echo "
                                         <td>$date</td>
                                     </tr>
                                 ";

@@ -198,6 +198,31 @@
                         <th>Item</th>
                         <th>Amount</th>
                         <th>Method</th>
+                        <?php
+            
+                            $tblquery = "SELECT * FROM morefields WHERE type = :type";
+                            $tblvalue = array(
+                                ':type' => 'P'
+                            );
+                            $select = $connect->tbl_select($tblquery,$tblvalue);
+                            
+                            if($select){
+                                $selected = true; 
+                                $numV = sizeof($select);
+                                foreach($select as $data){
+                                    extract($data);
+                                    if(!$enter){
+                                        $a = "$name";
+                                        $abc = $$a;
+                                    }
+                                    
+                                    echo "
+                                        <th>$content</th>
+                                    ";    
+                                }
+                            }
+                        
+                        ?>   
                         <th>Date</th>
                     </tr>
                 </thead>
@@ -230,6 +255,7 @@
                             $snE = 0;
                             foreach($select as $data){
                                 extract($data);
+                                $moreFields = explode('?* ', $more);
                                 echo "
                                     <tr>
                                         <td>$sn</td>
@@ -237,6 +263,24 @@
                                         <td>$item</td>
                                         <td>$amount</td>
                                         <td>$pm</td>
+                                ";
+                                        $numV;
+                                        if($selected){
+                                            for($i = 0; $i < $numV; $i++){
+                                                if($moreFields[$i]){
+                                                    echo "
+                                                        <td>$moreFields[$i]</td>
+                                                    ";
+                                                }else{
+                                                    echo "
+                                                        <td>-</td>
+                                                    ";
+                                                }
+                                            }
+                                            
+                                        }
+                                    
+                                echo "
                                         <td>$date</td>
                                     </tr>
                                 ";

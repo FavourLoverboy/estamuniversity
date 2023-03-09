@@ -124,7 +124,7 @@
                 move_uploaded_file($_FILES['passport']['tmp_name'], $location);
 
 
-                $tblquery = "INSERT INTO students VALUES(:id, :addedby, :regno, :lname, :fname, :mname, :sex, :dob, :state, :lga, :nationality, :num, :email, :password, :c_address, :c_city, :c_state, :c_country, :degree, :course, :mol, :level, :session, :passport, :files, :date, :status, :folder)";
+                $tblquery = "INSERT INTO students VALUES(:id, :addedby, :regno, :lname, :fname, :mname, :sex, :dob, :state, :lga, :nationality, :num, :email, :password, :c_address, :c_city, :c_state, :c_country, :degree, :course, :mol, :level, :session, :passport, :files, :date, :status, :folder, :more)";
                 
                 $totalValue = sizeof($credentials);
                 $newFiles = '';
@@ -160,7 +160,8 @@
                     ':files' => $newFiles,
                     ':date' => date('Y-m-d'),
                     ':status' => '1',
-                    ':folder' => $folder
+                    ':folder' => $folder,
+                    ':more' => $folder
                 );
                 $insert = $connect->tbl_insert($tblquery,$tblvalue);
                 if($insert){
