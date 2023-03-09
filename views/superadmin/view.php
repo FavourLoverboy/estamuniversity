@@ -241,6 +241,7 @@
                                     </tr>
                                 ";
                                 $sn++;    
+                                $snE++;
                             }
                         }else{
                             echo "
@@ -368,6 +369,7 @@
                                 }
                                 
                                 $sn++;
+                                $seE++;
                             }
                         }else{
                             echo "

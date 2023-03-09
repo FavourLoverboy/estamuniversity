@@ -104,6 +104,7 @@
         <thead>
             <tr>
                 <th>SN</th>   
+                <th>Added By</th>    
                 <th>Title</th>    
                 <th>Code</th>      
                 <th>CU</th>   
@@ -119,6 +120,22 @@
                 if($searches){
                     
                     $sn = 1;
+                    $snE = 0;
+
+                    $addEmail = array();
+                    foreach($searches as $data){
+                        extract($data);
+                        $tblquery = "SELECT * FROM staff WHERE id = :id";
+                        $tblvalue = array(
+                            ':id' => htmlspecialchars($addedby)
+                        );
+                        $sear = $connect->tbl_select($tblquery, $tblvalue);
+                        foreach($sear as $data){
+                            extract($data);
+                            array_push($addEmail, $email);
+                        }
+                    }
+
                     foreach($searches as $data){
                         extract($data);
                         if($score > 74){
@@ -152,6 +169,7 @@
                         echo "
                             <tr>
                                 <td>$sn</td>
+                                <td>$addEmail[$snE]</td>
                                 <td>$title</td>
                                 <td>$code</td>
                                 <td>$cu</td>
@@ -167,6 +185,7 @@
                             </tr>
                         "; 
                         $sn++;
+                        $snE++;
                     }
                 }else{
                     echo "

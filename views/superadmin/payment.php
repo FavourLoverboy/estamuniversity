@@ -167,7 +167,8 @@
                                         <td>$date</td>
                                     </tr>
                                 ";
-                                $sn++;    
+                                $sn++;
+                                $snE++;    
                             }
                         }else{
                             echo "
