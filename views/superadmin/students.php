@@ -3,24 +3,37 @@
     <hr />
     <?php 
         if($_POST['find']){
-            
             extract($_POST);
+            $_SESSION['c'] = $course;
+            $_SESSION['d'] = $degree;
+            $_SESSION['m'] = $mol;
+            $_SESSION['s'] = $session;
+            $_SESSION['l'] = $level;
             $tblquery = "SELECT * FROM students WHERE degree = :degree AND course = :course AND mol = :mol AND level = :level AND session = :session ORDER BY lname";
             $tblvalue = array(
-                ':degree' => htmlspecialchars($degree),
-                ':course' => htmlspecialchars($course),
-                ':mol' => htmlspecialchars($mol),
-                ':level' => htmlspecialchars($level),
-                ':session' => htmlspecialchars($session),
+                ':degree' => htmlspecialchars($_SESSION['d']),
+                ':course' => htmlspecialchars($_SESSION['c']),
+                ':mol' => htmlspecialchars($_SESSION['m']),
+                ':level' => htmlspecialchars($_SESSION['l']),
+                ':session' => htmlspecialchars($_SESSION['s']),
             );
             $searches = $connect->tbl_select($tblquery, $tblvalue);
         }
+        $tblquery = "SELECT * FROM students WHERE degree = :degree AND course = :course AND mol = :mol AND level = :level AND session = :session ORDER BY lname";
+        $tblvalue = array(
+            ':degree' => htmlspecialchars($_SESSION['d']),
+            ':course' => htmlspecialchars($_SESSION['c']),
+            ':mol' => htmlspecialchars($_SESSION['m']),
+            ':level' => htmlspecialchars($_SESSION['l']),
+            ':session' => htmlspecialchars($_SESSION['s']),
+        );
+        $searches = $connect->tbl_select($tblquery, $tblvalue);
     ?>
     <form action="" method="post">
         <div class="row">
             <div class="col-lg-3">
                 <select name="course" class="form-control" required>
-                    <option value="<?php echo $course; ?>"><?php echo $course; ?></option>
+                    <option value="<?php echo $_SESSION['c']; ?>"><?php echo $_SESSION['c']; ?></option>
                     <?php
                         $tblquery = "SELECT * FROM additional_details WHERE type = :type ORDER BY name";
                         $tblvalue = array(
@@ -40,7 +53,7 @@
 
             <div class="col-lg-3">
                 <select name="degree" class="form-control" required>
-                    <option value="<?php echo $degree; ?>"><?php echo $degree; ?></option>
+                    <option value="<?php echo $_SESSION['d']; ?>"><?php echo $_SESSION['d']; ?></option>
                     <?php
                         $tblquery = "SELECT * FROM additional_details WHERE type = :type ORDER BY name";
                         $tblvalue = array(
@@ -60,7 +73,7 @@
 
             <div class="col-lg-3">
                 <select name="mol" class="form-control" required>
-                    <option value="<?php echo $mol; ?>"><?php echo $mol; ?></option>
+                    <option value="<?php echo $_SESSION['m']; ?>"><?php echo $_SESSION['m']; ?></option>
                     <?php
                         $tblquery = "SELECT * FROM additional_details WHERE type = :type ORDER BY name";
                         $tblvalue = array(
@@ -80,7 +93,7 @@
             
             <div class="col-lg-3">
                 <select name="session" class="form-control" required>
-                    <option value="<?php echo $session; ?>"><?php echo $session; ?></option>
+                    <option value="<?php echo $_SESSION['s']; ?>"><?php echo $_SESSION['s']; ?></option>
                     <?php
                         $tblquery = "SELECT session FROM students GROUP BY session ORDER BY session";
                         $tblvalue = array();
@@ -99,7 +112,7 @@
             <div class="col-lg-3">
                 <br>
                 <select name="level" class="form-control" required>
-                    <option value="<?php echo $level; ?>"><?php echo $level; ?></option>
+                    <option value="<?php echo $_SESSION['l']; ?>"><?php echo $_SESSION['l']; ?></option>
                     <option value="100">100</option>
                     <option value="200">200</option>
                     <option value="300">300</option>
@@ -226,6 +239,7 @@
         $_SESSION['stu_country'] = $stu_country;
         $_SESSION['stu_files'] = $stu_files;
         echo "<script>  window.location='view' </script>";
+        // echo "<script>  window.open('view', '_blank') </script>";
     }
 
 ?>

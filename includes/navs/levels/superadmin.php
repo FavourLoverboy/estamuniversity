@@ -34,7 +34,7 @@
     </div>
     <div class="submenu">
         <a href="#" class="link submenu-title">Result</a>
-        <a href="" class="link">Add</a>
+        <a href="re" class="link">Add</a>
         <a href="#" class="link">Results</a>
     </div>
 </li>
@@ -65,6 +65,7 @@
         <a href="addstaff" class="link">Add Staff</a>
         <a href="changepassword" class="link">Change Password</a>
         <a href="paymentdetails" class="link">Payment Settings</a>
+        <a href="resultdetails" class="link">Result Settings</a>
         <a href="staffs" class="link">Staffs</a>
         <a href="update" class="link">Study Details</a>
     </div>

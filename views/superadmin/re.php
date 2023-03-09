@@ -1,5 +1,5 @@
 <div style="background:#fff;padding:30px;">
-    <h3>search students</h3>
+    <h5>search students</h5>
     <hr />
     <?php 
         if($_POST['find']){
@@ -9,6 +9,7 @@
             $_SESSION['m'] = $mol;
             $_SESSION['s'] = $session;
             $_SESSION['l'] = $level;
+            $_SESSION['se'] = $semester;
             $tblquery = "SELECT * FROM students WHERE degree = :degree AND course = :course AND mol = :mol AND level = :level AND session = :session ORDER BY lname";
             $tblvalue = array(
                 ':degree' => htmlspecialchars($_SESSION['d']),
@@ -123,6 +124,16 @@
             </div>
             <div class="col-lg-3">
                 <br>
+                <select name="semester" class="form-control" required>
+                    <option value="<?php echo $_SESSION['se']; ?>"><?php echo $_SESSION['se']; ?></option>
+                    <option value="1st">1st</option>
+                    <option value="2nd">2nd</option>
+                    <option value="3rd">3rd</option>
+                </select>
+                <small>Semester</small>
+            </div>
+            <div class="col-lg-3">
+                <br>
                 <input type="submit" name="find" class="btn btn-primary" value="Proceed">
             </div>
         </div>
@@ -148,6 +159,7 @@
             <?php
 
                 if($searches){
+                    
                     $sn = 1;
                     foreach($searches as $data){
                         extract($data);
@@ -163,7 +175,7 @@
                                 <td>
                                     <form action='' method='post'>
                                         <input type='hidden' name='stu_id' value='$id'>
-                                        <input type='hidden' name='stu_level' value='$level'>
+                                        <input type='hidden' name='stu_namename' value='$lname $fname $mname'>
                                         <input type='submit' name='view' class='btn btn-sm btn-info' value='see more ...'>
                                     </form>
                                 </td>
@@ -189,9 +201,9 @@
     if($_POST['view']){
         extract($_POST);
         $_SESSION['stu_id'] = $stu_id;
-        $_SESSION['stu_level'] = $stu_level;
-        // echo "<script>  window.open('payment', '_blank)  </script>";
-        echo "<script>  window.location='payment' </script>";
+        $_SESSION['namename'] = $stu_namename;
+        // echo "<script>  window.open('result', '_blank') </script>";
+        echo "<script>  window.location='result' </script>";
     }
 
 ?>

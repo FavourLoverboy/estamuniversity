@@ -23,7 +23,7 @@
             if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'RA'){
                 echo "
                     <div class=col-3>
-                        <a href='' class='btn btn-info'>Add result</a>
+                        <a href='re' class='btn btn-info'>Add result</a>
                     </div>
                 ";
             }
@@ -169,6 +169,7 @@
     </div>
 
     <br>
+    <label><strong>Other credentials</strong></label>
     <div class="row">
         <?php 
         
@@ -186,6 +187,7 @@
     </div>
 
     <br>
+    <label><strong>Payments</strong></label>
     <div class="row">
         <div class="col-12">
             <table class='table table-bordered' style='font-family: Arial; font-size: 15px;'>
@@ -201,33 +203,144 @@
                 <tbody>
                     <?php
                     
+                        $tblquery = "SELECT * FROM payment WHERE stu_id = :stu_id AND level = :level ORDER BY item";
+                        $tblvalue = array(
+                            ':stu_id' => $_SESSION['stu_id'],
+                            ':level' => $_SESSION['stu_level'],
+                        );
+                        $select = $connect->tbl_select($tblquery,$tblvalue);
+                        if($select){
+                            $sn = 1;
+                            foreach($select as $data){
+                                extract($data);
+                                echo "
+                                    <tr>
+                                        <td>$sn</td>
+                                        <td>$item</td>
+                                        <td>$amount</td>
+                                        <td>$pm</td>
+                                        <td>$date</td>
+                                    </tr>
+                                ";
+                                $sn++;    
+                            }
+                        }else{
+                            echo "
+                                <tr>
+                                    <td colspan='5'>no payment made</td>
+                                </tr>
+                            ";
+                        }
                         
                     
                     ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <br>
+    <label><strong>Results</strong></label>
+    <div class="row">
+        <div class="col-12">
+            <table class='table table-bordered' style='font-family: Arial; font-size: 15px;'>
+                <thead>
                     <tr>
-                        <td>
-                            <h6>Course</h6>
-                            <?php echo $_SESSION['stu_course']; ?>
-                        </td>
-                        <td>
-                            <h6>Degree</h6>
-                            <?php echo $_SESSION['stu_degree']; ?>
-                        </td>
-                        <td>
-                            <h6>Session</h6>
-                            <?php echo $_SESSION['stu_session']; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6>Level</h6>
-                            <?php echo $_SESSION['stu_level']; ?>
-                        </td>
-                        <td>
-                            <h6>Method</h6>
-                            <?php echo $_SESSION['stu_mol']; ?>
-                        </td>
-                    </tr>
+                        <th>SN</th>
+                        <th>Title</th>    
+                        <th>Code</th>      
+                        <th>CU</th>   
+                        <th>Score</th>     
+                        <th>Grade</th>     
+                        <th>GP</th>     
+                    </tr>  
+                </thead>
+                <tbody> 
+                    <?php
+                        $tblquery = "SELECT * FROM result WHERE userid = :userid AND level = :level AND session = :session ORDER BY semester, code";
+                        $tblvalue = array(
+                            ':userid' => htmlspecialchars($_SESSION['stu_id']),
+                            ':level' => htmlspecialchars($_SESSION['stu_level']),
+                            ':session' => htmlspecialchars($_SESSION['stu_session'])
+                        );
+                        $searches = $connect->tbl_select($tblquery, $tblvalue);
+                        $se = '1st';
+                        if($searches){
+                            $sn = 1;
+                            foreach($searches as $data){
+                                extract($data);
+                                
+                                if($score > 74){
+                                    $g = 'A';
+                                    $gp = '4.00';
+                                }elseif($score > 69){
+                                    $g = 'AB';
+                                    $gp = '3.50';
+                                }elseif($score > 64){
+                                    $g = 'B';
+                                    $gp = '3.25';
+                                }elseif($score > 59){
+                                    $g = 'BC';
+                                    $gp = '3.00';
+                                }elseif($score > 54){
+                                    $g = 'C';
+                                    $gp = '2.75';
+                                }elseif($score > 49){
+                                    $g = 'CD';
+                                    $gp = '2.50';
+                                }elseif($score > 44){
+                                    $g = 'D';
+                                    $gp = '2.25';
+                                }elseif($score > 39){
+                                    $g = 'E';
+                                    $gp = '2.00';
+                                }else{
+                                    $g = 'F';
+                                    $gp = '0.00';
+                                }
+                                if(strpos($se, $semester) > -1){
+                                    echo "
+                                        <tr>
+                                            <td>$sn</td>
+                                            <td>$title</td>
+                                            <td>$code</td>
+                                            <td>$cu</td>
+                                            <td>$score</td>
+                                            <td>$g</td>
+                                            <td>$gp</td>
+                                        </tr>
+                                    "; 
+                                }else{
+                                    $se = $se . $semester;
+                                    $sn = 1;
+                                    echo "
+                                        <tr>
+                                            <td colspan='8'></td>
+                                        </tr>
+                                        <tr>
+                                            <td>$sn</td>
+                                            <td>$title</td>
+                                            <td>$code</td>
+                                            <td>$cu</td>
+                                            <td>$score</td>
+                                            <td>$g</td>
+                                            <td>$gp</td>
+                                        </tr>
+                                    "; 
+                                }
+                                
+                                $sn++;
+                            }
+                        }else{
+                            echo "
+                                <tr>
+                                    <td colspan='7'>no result found</td>
+                                </tr>
+                            "; 
+                        }
+
+                    ?>
                 </tbody>
             </table>
         </div>
