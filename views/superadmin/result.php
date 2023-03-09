@@ -19,10 +19,11 @@
             );
             $scoreCheck = $connect->tbl_select($tblquery, $tblvalue);
             if(!$scoreCheck){
-                $tblquery = "INSERT INTO result VALUES(:id, :userid, :level, :session, :semester, :title, :code, :cu, :score, :date)";
+                $tblquery = "INSERT INTO result VALUES(:id, :userid, :addedby, :level, :session, :semester, :title, :code, :cu, :score, :date)";
                 $tblvalue = array(
                     ':id' => NULL, 
                     ':userid' => htmlspecialchars($_SESSION['stu_id']),
+                    ':addedby' => htmlspecialchars($_SESSION['myId']),
                     ':level' => htmlspecialchars($_SESSION['l']),
                     ':session' => htmlspecialchars($_SESSION['s']), 
                     ':semester' => htmlspecialchars($_SESSION['se']),

@@ -1,5 +1,6 @@
 <div style="background:#fff;padding:30px;">
-    <h3>Add payment</h3>
+    <h5>Add payment for</h5>
+    <?php echo $_SESSION['stu_name']; ?>
     <hr />
     <?php 
         if($_POST){
@@ -14,10 +15,11 @@
             );
             $paymentCheck = $connect->tbl_select($tblquery, $tblvalue);
             if(!$paymentCheck){
-                $tblquery = "INSERT INTO payment VALUES(:id, :stu_id, :level, :item, :amount, :tid, :pm, :note, :date)";
+                $tblquery = "INSERT INTO payment VALUES(:id, :stu_id, :addedby, :level, :item, :amount, :tid, :pm, :note, :date)";
                 $tblvalue = array(
                     ':id' => NULL, 
                     ':stu_id' => htmlspecialchars($_SESSION['stu_id']),
+                    ':addedby' => htmlspecialchars($_SESSION['myId']),
                     ':level' => htmlspecialchars($_SESSION['stu_level']),
                     ':item' => htmlspecialchars($item), 
                     ':amount' => htmlspecialchars($amount),
@@ -108,4 +110,77 @@
             </div>
         </div>
     </form>
+</div>
+
+<br>
+
+<div style="background:#fff;padding:30px;">
+    <div class="row">
+        <div class="col-12">
+            <table class='table table-bordered' style='font-family: Arial; font-size: 15px;'>
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Added By</th>
+                        <th>Item</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    
+                        $tblquery = "SELECT * FROM payment WHERE stu_id = :stu_id AND level = :level ORDER BY item";
+                        $tblvalue = array(
+                            ':stu_id' => $_SESSION['stu_id'],
+                            ':level' => $_SESSION['stu_level'],
+                        );
+                        $select = $connect->tbl_select($tblquery,$tblvalue);
+                        if($select){
+                            $addEmail = array();
+                            foreach($select as $data){
+                                extract($data);
+                                $tblquery = "SELECT * FROM staff WHERE id = :id";
+                                $tblvalue = array(
+                                    ':id' => htmlspecialchars($addedby)
+                                );
+                                $sear = $connect->tbl_select($tblquery, $tblvalue);
+                                foreach($sear as $data){
+                                    extract($data);
+                                    array_push($addEmail, $email);
+                                }
+                            }
+                        }
+                        if($select){
+                            $sn = 1;
+                            $snE = 0;
+                            foreach($select as $data){
+                                extract($data);
+                                echo "
+                                    <tr>
+                                        <td>$sn</td>
+                                        <td>$addEmail[$snE]</td>
+                                        <td>$item</td>
+                                        <td>$amount</td>
+                                        <td>$pm</td>
+                                        <td>$date</td>
+                                    </tr>
+                                ";
+                                $sn++;    
+                            }
+                        }else{
+                            echo "
+                                <tr>
+                                    <td colspan='5'>no payment made</td>
+                                </tr>
+                            ";
+                        }
+                        
+                    
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

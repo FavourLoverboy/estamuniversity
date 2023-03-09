@@ -137,6 +137,7 @@
         <thead>
             <tr>
                 <th>SN</th>  
+                <th>Added By</th>    
                 <th>Img</th>    
                 <th>Name</th>    
                 <th>Email</th>      
@@ -146,14 +147,32 @@
         </thead>  
         <tbody> 
             <?php
+                if($searches){
+                    $addEmail = array();
+                    foreach($searches as $data){
+                        extract($data);
+                        $tblquery = "SELECT * FROM staff WHERE id = :id";
+                        $tblvalue = array(
+                            ':id' => htmlspecialchars($addedby)
+                        );
+                        $sear = $connect->tbl_select($tblquery, $tblvalue);
+                        foreach($sear as $data){
+                            extract($data);
+                            array_push($addEmail, $email);
+                        }
+                    }
+                }
+
 
                 if($searches){
                     $sn = 1;
+                    $snEmail = 0;
                     foreach($searches as $data){
                         extract($data);
                         echo "
                             <tr>
                                 <td>$sn</td>
+                                <td>$addEmail[$snEmail]</td>
                                 <td>
                                     <img src='../uploads/$folder/$passport' class='rounded-circle' style='height: 40px; width: 40px'>
                                 </td>

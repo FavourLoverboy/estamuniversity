@@ -163,6 +163,7 @@
                                 <td>
                                     <form action='' method='post'>
                                         <input type='hidden' name='stu_id' value='$id'>
+                                        <input type='hidden' name='stu_name' value='$lname $fname $mname'>
                                         <input type='hidden' name='stu_level' value='$level'>
                                         <input type='submit' name='view' class='btn btn-sm btn-info' value='see more ...'>
                                     </form>
@@ -189,6 +190,7 @@
     if($_POST['view']){
         extract($_POST);
         $_SESSION['stu_id'] = $stu_id;
+        $_SESSION['stu_name'] = $stu_name;
         $_SESSION['stu_level'] = $stu_level;
         // echo "<script>  window.open('payment', '_blank)  </script>";
         echo "<script>  window.location='payment' </script>";
