@@ -271,7 +271,32 @@
                         <th>Title</th>    
                         <th>Code</th>      
                         <th>CU</th>   
-                        <th>Score</th>     
+                        <th>Score</th>
+                        <?php
+            
+                            $tblquery = "SELECT * FROM morefields WHERE type = :type";
+                            $tblvalue = array(
+                                ':type' => 'R'
+                            );
+                            $select = $connect->tbl_select($tblquery,$tblvalue);
+                            
+                            if($select){
+                                $selected = true; 
+                                $numV = sizeof($select);
+                                foreach($select as $data){
+                                    extract($data);
+                                    if(!$enter){
+                                        $a = "$name";
+                                        $abc = $$a;
+                                    }
+                                    
+                                    echo "
+                                        <th>$content</th>
+                                    ";    
+                                }
+                            }
+                        
+                        ?>     
                         <th>Grade</th>     
                         <th>GP</th>     
                     </tr>  
@@ -335,6 +360,8 @@
                                     $g = 'F';
                                     $gp = '0.00';
                                 }
+
+                                $moreFields = explode('?* ', $more);
                                 if(strpos($se, $semester) > -1){
                                     echo "
                                         <tr>
@@ -344,6 +371,24 @@
                                             <td>$code</td>
                                             <td>$cu</td>
                                             <td>$score</td>
+                                    ";
+                                        $numV;
+                                        if($selected){
+                                            for($i = 0; $i < $numV; $i++){
+                                                if($moreFields[$i]){
+                                                    echo "
+                                                        <td>$moreFields[$i]</td>
+                                                    ";
+                                                }else{
+                                                    echo "
+                                                        <td>-</td>
+                                                    ";
+                                                }
+                                            }
+                                            
+                                        }
+                                    
+                                    echo "
                                             <td>$g</td>
                                             <td>$gp</td>
                                         </tr>
@@ -362,6 +407,24 @@
                                             <td>$code</td>
                                             <td>$cu</td>
                                             <td>$score</td>
+                                    ";
+                                        $numV;
+                                        if($selected){
+                                            for($i = 0; $i < $numV; $i++){
+                                                if($moreFields[$i]){
+                                                    echo "
+                                                        <td>$moreFields[$i]</td>
+                                                    ";
+                                                }else{
+                                                    echo "
+                                                        <td>-</td>
+                                                    ";
+                                                }
+                                            }
+                                            
+                                        }
+                                    
+                                    echo "
                                             <td>$g</td>
                                             <td>$gp</td>
                                         </tr>

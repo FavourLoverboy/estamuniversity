@@ -64,6 +64,7 @@
         <a href="#" class="link submenu-title">Settings</a>
         <a href="addstaff" class="link">Add Staff</a>
         <a href="changepassword" class="link">Change Password</a>
+        <a href="formsfields" class="link">More Fields</a>
         <a href="paymentdetails" class="link">Payment Settings</a>
         <a href="resultdetails" class="link">Result Settings</a>
         <a href="staffs" class="link">Staffs</a>

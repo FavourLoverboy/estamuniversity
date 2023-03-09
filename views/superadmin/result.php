@@ -19,7 +19,26 @@
             );
             $scoreCheck = $connect->tbl_select($tblquery, $tblvalue);
             if(!$scoreCheck){
-                $tblquery = "INSERT INTO result VALUES(:id, :userid, :addedby, :level, :session, :semester, :title, :code, :cu, :score, :date)";
+                // getting additional field value
+                $allFields = array();
+                $tblquery = "SELECT * FROM morefields WHERE type = :type";
+                $tblvalue = array(
+                    ':type' => 'R'
+                );
+                $select = $connect->tbl_select($tblquery,$tblvalue);
+                foreach($select as $data){
+                    extract($data);
+                    array_push($allFields, $name); 
+                }
+
+                $allMore = '';
+                foreach($allFields as $data){
+                    $a = "$data";
+                    $allMore .= htmlspecialchars($$a . '?* ');
+                }
+                $allMore = rtrim($allMore, "?* ");
+
+                $tblquery = "INSERT INTO result VALUES(:id, :userid, :addedby, :level, :session, :semester, :title, :code, :cu, :score, :more, :date)";
                 $tblvalue = array(
                     ':id' => NULL, 
                     ':userid' => htmlspecialchars($_SESSION['stu_id']),
@@ -31,12 +50,14 @@
                     ':code' => htmlspecialchars($allCourse[1]),
                     ':cu' => htmlspecialchars($allCourse[2]),
                     ':score' => htmlspecialchars($score),
+                    ':more' => $allMore,
                     ':date' => date('Y-m-d')
                 );
                 $insert = $connect->tbl_insert($tblquery,$tblvalue);
                 if($insert){
                     echo "<p class='text-success'>score added</p>";
                     $score = '';
+                    $enter = true;
                 }
             }else{
                 echo "<p class='text-danger'>score already added</p>";
@@ -88,6 +109,29 @@
                 score <br/>
                 <input type="number" name="score" class="form-control" value="<?php echo $score; ?>" required>
             </div>
+            <?php
+            
+                $tblquery = "SELECT * FROM morefields WHERE type = :type";
+                $tblvalue = array(
+                    ':type' => 'R'
+                );
+                $select = $connect->tbl_select($tblquery,$tblvalue);
+                foreach($select as $data){
+                    extract($data);
+                    if(!$enter){
+                        $a = "$name";
+                        $abc = $$a;
+                    }
+                    
+                    echo "
+                        <div class='col-lg-3'>
+                            $content <br/>
+                            <input type='text' name='$name' value='$abc' class='form-control'>
+                        </div>
+                    ";    
+                }
+            
+            ?>
             <div class="col-lg-3">
                 <br />
                 <input type="submit" name="add" class="btn btn-primary" value="Add School">
@@ -108,8 +152,33 @@
                 <th>Title</th>    
                 <th>Code</th>      
                 <th>CU</th>   
-                <th>Score</th>     
-                <th>Grade</th>     
+                <th>Score</th>
+                <?php
+            
+                    $tblquery = "SELECT * FROM morefields WHERE type = :type";
+                    $tblvalue = array(
+                        ':type' => 'R'
+                    );
+                    $select = $connect->tbl_select($tblquery,$tblvalue);
+                    
+                    if($select){
+                        $selected = true; 
+                        $numV = sizeof($select);
+                        foreach($select as $data){
+                            extract($data);
+                            if(!$enter){
+                                $a = "$name";
+                                $abc = $$a;
+                            }
+                            
+                            echo "
+                                <th>$content</th>
+                            ";    
+                        }
+                    }
+                
+                ?>     
+                <th>Grade</th>    
                 <th>GP</th>     
                 <th>Remove</th>     
             </tr>     
@@ -166,6 +235,9 @@
                             $g = 'F';
                             $gp = '0.00';
                         }
+                        
+                        
+                        $moreFields = explode('?* ', $more);
                         echo "
                             <tr>
                                 <td>$sn</td>
@@ -174,6 +246,24 @@
                                 <td>$code</td>
                                 <td>$cu</td>
                                 <td>$score</td>
+                        ";
+                            $numV;
+                            if($selected){
+                                for($i = 0; $i < $numV; $i++){
+                                    if($moreFields[$i]){
+                                        echo "
+                                            <td>$moreFields[$i]</td>
+                                        ";
+                                    }else{
+                                        echo "
+                                            <td>-</td>
+                                        ";
+                                    }
+                                }
+                                
+                            }
+                        
+                        echo "
                                 <td>$g</td>
                                 <td>$gp</td>
                                 <td>
