@@ -532,20 +532,9 @@
                     </table>
                 </div>
             </div>
-
-            <?php
-                if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'SA'){
-                    echo "
-                        <br>
-                        <div class='row'>
-                            <div class=col-3>
-                                <a href='printpage.php' class='btn btn-primary'>Print Details</a>
-                            </div>
-                        </div>
-                    ";
-                }
-            ?>
         </div>
+        <script>
+            window.print();
+        </script>
     </body>
 </html>
-<?php //include('includes/main/footer.php'); ?>
