@@ -8,6 +8,9 @@
                     <div class=col-3>
                         <a href='editstudent' class='btn btn-warning'>Edit student details</a>
                     </div>
+                    <div class=col-3>
+                        <button onclick='deleteFunction()' class='btn btn-danger'>Delete</button>
+                    </div>
                 ";
             }
             if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'PA'){
@@ -26,6 +29,23 @@
             }
         
         ?>
+        <script>
+            function deleteFunction(){
+                let text = "confirm please";
+                if(confirm(text) == true){
+                    <?php
+                    
+                        $tblquery = "DELETE FROM students WHERE id = :id";
+                        $tblvalue = array(
+                            ':id' => $_SESSION['stu_id']
+                        );
+                        $delete = $connect->tbl_delete($tblquery,$tblvalue);
+                    
+                    ?>
+                    alert("<?php echo $_SESSION['stu_name'] . ' has been deleted'; ?>");
+                }
+            }
+        </script>
     </div>
 
     <hr>

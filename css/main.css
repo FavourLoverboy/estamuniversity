@@ -205,10 +205,281 @@ span.main{
     font-weight: 600;
 }
 
+/* dashboard */
+:root{
+    --blue: #2a2185;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+}
 
+/* main */
+.main{
+    background: var(--white);
+    position: absolute;
+    /* left: 300px; */
+    min-height: 100vh;
+    transition: .5s;
+    /* width: 100%; */
+}
+/* .main.active{
+    left: 80px;
+    width: calc(100% - 80px);
+}
+.topbar{
+    align-items: center;
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    padding: 0 10px;
+    width: 100%
+}
+.toggle{
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-size: 2.5rem;
+    height: 60px;
+    justify-content: center;
+    position: relative;
+    width: 60px;
+}
+.search{
+    margin: 0 10px;
+    position: relative;
+    width: 400px;
+}
+.search label{
+    position: relative;
+    width: 100%;
+}
+.search label input{
+    border: 1px solid var(--black2);
+    border-radius: 40px;
+    font-size: 18px;
+    height: 40px;
+    outline: none;
+    padding: 5px 20px;
+    padding-left: 35px;
+    width: 100%;
+}
+.search label ion-icon{
+    font-size: 1.2rem;
+    left: 10px;
+    position: absolute;
+    top: 0;
+}
 
+.user{
+    border-radius: 50%;
+    cursor: pointer;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+    width: 40px;
+}
+.user img{
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 100%
+} */
 
+/* cards */
+.cardBox{
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 20px;
+    position: relative;
+    width: 100%;
+}
+.cardBox .card{
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    /* padding: 30px; */
+    position: relative;
+}
+.cardBox .card .numbers{
+    color: var(--blue);
+    font-size: 1.5rem;
+    /* font-size: 2.5rem; */
+    font-weight: 500;
+    position: relative;
+}
+.cardBox .card .cardName{
+    color: var(--black2);
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
 
+.cardBox .card .iconBx{
+    color: var(--black2);
+    font-size: 1.5rem;
+    /* font-size: 2.5rem; */
+}
+.cardBox .card:hover{
+    background: var(--blue);
+}
+.cardBox .card:hover .numbers,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .iconBx{
+    color: var(--white);
+}
+
+/*  Orders */
+.details{
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: 2fr 1fr;
+    /* margin-top: 10px; */
+    padding: 20px;
+    position: relative;
+    width: 100%;
+}
+.details .recentOrders{
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    display: grid;
+    min-height: 500px;
+    padding: 20px;
+    position: relative;
+}
+.details .cardHeader{
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+}
+.cardHeader h2{
+    color: var(--blue);
+    font-weight: 600;
+}
+.cardHeader .btn{
+    background: var(--blue);
+    border-radius: 6px;
+    color: var(--white);
+    padding: 5px 10px;
+    position: relative;
+    text-decoration: none;
+}
+.details table{
+    border-collapse: collapse;
+    margin-top: 10px;
+    width: 100%;
+}
+.details table thead td{
+    font-weight: 600;
+}
+.details .recentOrders table tr{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--black1);
+}
+.details .recentOrders table tr:last-child{
+    border-bottom: none;
+}
+.details .recentOrders table tr:hover{
+    background: var(--blue);
+    color: var(--white);
+}
+.details .recentOrders table tr td{
+    padding: 10px;
+}
+.details .recentOrders table tr td:last-child{
+    text-align: end;
+}
+.details .recentOrders table tr td:nth-child(2){
+    text-align: end;
+}
+.details .recentOrders table tr td:nth-child(3){
+    text-align: center;
+}
+.status.delivered{
+    background: #8de02c;
+    border-radius: 4px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 4px;
+}
+.status.pending{
+    background: #e9b10a;
+    border-radius: 4px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 4px;
+}
+.status.return{
+    background: #f00;
+    border-radius: 4px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 4px;
+}
+.status.inProgress{
+    background: #1795ce;
+    border-radius: 4px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 4px;
+}
+
+.recentCustomers{
+    background: var(--white);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    display: grid;
+    min-height: 500px;
+    padding: 20px;
+    position: relative;
+}
+.recentCustomers .imgBx{
+    border-radius: 50px;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+    width: 40px;
+}
+.recentCustomers .imgBx img{
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.recentCustomers table tr td{
+    padding: 12px 10px;
+}
+.recentCustomers table tr td h4{
+    line-height: 1.2rem;
+    font-size: 16px;
+    font-weight: 500;
+}
+.recentCustomers table tr td h4 span{
+    color: var(--black2);
+    font-size: 14px;
+}
+.recentCustomers table tr:hover{
+    background: var(--blue);
+    color: var(--white);
+}
+.recentCustomers table tr:hover td h4 span{
+    color: var(--white);
+}
+/* end dashboard */
 
 
 
