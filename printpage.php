@@ -25,6 +25,12 @@
     <body>
         <div class="container" style="background:#fff;padding:30px;">
             <div class="row">
+                <div class="col-12">
+                    <center>
+                        <img src='https://estamuniversity-akpakpacampus.org/zenith/wp-content/uploads/2019/07/cropped-cropped-ESTAMLOGO-2-2.png'>
+                    </center>
+                    <br><br>
+                </div>
                 <div class="col-3">
                     <img src='uploads/<?php echo $_SESSION['stu_folder'] . '/' . $_SESSION['stu_img']; ?>' style="height: 300px; width:200px; border-radius:5px;">
                 </div>
