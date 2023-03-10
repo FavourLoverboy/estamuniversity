@@ -5,53 +5,53 @@
         
             if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'SA'){
                 echo "
-                    <div class=col-3>
+                    <div class='col-3'>
                         <a href='editstudent' class='btn btn-warning'>Edit student details</a>
                     </div>
-                    <div class=col-3>
-                        <button onclick='deleteFunction()' class='btn btn-danger'>Delete</button>
+                    <div class='col-3'>
+                        <a onclick='delete()' class='btn btn-danger'>Delete</a>
                     </div>
                 ";
             }
             if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'PA'){
                 echo "
-                    <div class=col-3>
+                    <div class='col-3'>
                         <a href='payment' class='btn btn-primary'>Add payment</a>
                     </div>
                 ";
             }
             if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'RA'){
                 echo "
-                    <div class=col-3>
+                    <div class='col-3'>
                         <a href='re' class='btn btn-info'>Add result</a>
                     </div>
                 ";
             }
         
         ?>
+        
         <script>
-            function deleteFunction(){
-                let text = "confirm please";
-                if(confirm(text) == true){
-                    <?php
-                    
-                        $tblquery = "DELETE FROM students WHERE id = :id";
-                        $tblvalue = array(
-                            ':id' => $_SESSION['stu_id']
-                        );
-                        $delete = $connect->tbl_delete($tblquery,$tblvalue);
-                    
-                    ?>
-                    alert("<?php echo $_SESSION['stu_name'] . ' has been deleted'; ?>");
-                }
+
+            function(){
+
             }
+
         </script>
+        <?php
+            // $_SESSION['stu_id'];
+            // $ids = '';
+            // $tblquery = "DELETE FROM students WHERE id = :id";
+            // $tblvalue = array(
+            //     ':id' => $ids
+            // );
+            // $delete = $connect->tbl_delete($tblquery,$tblvalue);
+        ?>
     </div>
 
     <hr>
     <div class="row">
         <div class="col-3">
-            <img src='../uploads/<?php echo $_SESSION['stu_folder'] . '/' . $_SESSION['stu_img']; ?>' style="height: 100%; width:100%; border-radius:5px;">
+            <img src='../uploads/<?php echo $_SESSION['stu_folder'] . '/' . $_SESSION['stu_img']; ?>' style="height: 300px; width:200px; border-radius:5px;">
         </div>
         <div class="col-9">
             <div class="row">
@@ -244,7 +244,7 @@
             for($i = 0; $i < sizeof($files) - 1; $i++){
                 echo "
                     <div class='col-3'>
-                        <img src='../uploads/$path/$files[$i]' style='height: 100%; width:100%; border-radius:5px;'>
+                        <img src='../uploads/$path/$files[$i]' style='height: 300px; width:200px; border-radius:5px;'>
                     </div>
                 ";
             }
@@ -557,4 +557,17 @@
             </table>
         </div>
     </div>
+
+    <?php
+        if($_SESSION['level'] == 'SUA' || $_SESSION['level'] == 'SA'){
+            echo "
+                <br>
+                <div class='row'>
+                    <div class=col-3>
+                        <a href='/estamuniversity/print.php' class='btn btn-primary'>Print Details </a>
+                    </div>
+                </div>
+            ";
+        }
+    ?>
 </div>
