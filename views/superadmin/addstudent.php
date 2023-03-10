@@ -123,6 +123,26 @@
                 // Save the uploaded File to the local file system
                 move_uploaded_file($_FILES['passport']['tmp_name'], $location);
 
+                // getting additional field value
+                $allFields = array();
+                $tblquery = "SELECT * FROM morefields WHERE type = :type";
+                $tblvalue = array(
+                    ':type' => 'S'
+                );
+                $select = $connect->tbl_select($tblquery,$tblvalue);
+                foreach($select as $data){
+                    extract($data);
+                    array_push($allFields, $name); 
+                }
+
+                $allMore = '';
+                foreach($allFields as $data){
+                    $a = "$data";
+                    $allMore .= htmlspecialchars(ucfirst($$a) . '?* ');
+                }
+                $allMore = rtrim($allMore, "?* ");
+
+
 
                 $tblquery = "INSERT INTO students VALUES(:id, :addedby, :regno, :lname, :fname, :mname, :sex, :dob, :state, :lga, :nationality, :num, :email, :password, :c_address, :c_city, :c_state, :c_country, :degree, :course, :mol, :level, :session, :passport, :files, :date, :status, :folder, :more)";
                 
@@ -161,7 +181,7 @@
                     ':date' => date('Y-m-d'),
                     ':status' => '1',
                     ':folder' => $folder,
-                    ':more' => $folder
+                    ':more' => $allMore
                 );
                 $insert = $connect->tbl_insert($tblquery,$tblvalue);
                 if($insert){
@@ -410,9 +430,41 @@
                 <small style="display: block;">WAEC RESULT, LGA IDENTIFICATION, BIRTH CERTIFICATE/AGE DECLARATION</small>
                 <small style="display: block;">Accepted file types: jpg, jpeg, png, Max. file size: 100 MB, Max. files: 10</small>
             </div>
-            
+        </div>        
+        
+        <?php
+            $tblquery = "SELECT * FROM morefields WHERE type = :type";
+            $tblvalue = array(
+                ':type' => 'S'
+            );
+            $select = $connect->tbl_select($tblquery,$tblvalue);
+            if($select){
+                echo "<br><small><strong>Others</strong></small>";
+            }
+        ?>
+        <div class="row">   
+            <?php
+                
+                if($select){
+                    foreach($select as $data){
+                        extract($data);
+                        if(!$enter){
+                            $a = "$name";
+                            $abc = $$a;
+                        }
+                        
+                        echo "
+                            <div class='col-lg-3'>
+                                $content <br/>
+                                <input type='text' name='$name' value='$abc' class='form-control'>
+                            </div>
+                        ";    
+                    }
+                }
+            ?>
+
             <div class="col-lg-3">
-                <br><br>
+                <br>
                 <input type="submit" name="submit" value="Add Student" class="btn btn-primary">
             </div>
         </div>

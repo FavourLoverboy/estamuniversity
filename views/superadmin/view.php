@@ -1,7 +1,4 @@
 <div style="background:#fff;padding:30px;">
-    <!-- <h3 style="font-family: Arial; font-weight: 300;"> -->
-        <?php //echo $_SESSION['stu_name']; ?>
-    <!-- </h3> -->
 
     <div class="row">
         <?php
@@ -167,6 +164,55 @@
             </table>
         </div>
     </div>
+
+
+    <?php
+        $tblquery = "SELECT * FROM morefields WHERE type = :type";
+        $tblvalue = array(
+            ':type' => 'S'
+        );
+        $select = $connect->tbl_select($tblquery,$tblvalue);
+        if($select){
+            echo "
+                <br>
+                <small><strong>Others</strong></small>
+                <div class='row'>
+                    <div class='col-12'>
+                        <table class='table table-bordered' style='font-family: Arial; font-size: 15px;'>
+                            <tbody>
+                                <tr>
+            ";
+                $i = 0;
+                foreach($select as $data){
+                    extract($data);
+                    echo "
+                            <td>
+                                <h6>$content</h6>
+                    ";
+                                $tblquery = "SELECT more FROM students WHERE id = :id";
+                                $tblvalue = array(
+                                    ':id' => $_SESSION['stu_id']
+                                );
+                                $selects = $connect->tbl_select($tblquery,$tblvalue);
+                                foreach($selects as $date){
+                                    extract($date);
+                                    $moreFields = explode('?* ', $more);
+                                    echo $moreFields[$i];
+                                }
+                    echo"
+                            </td>
+                    ";
+                    $i++;
+                }
+            echo "
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            ";
+        }
+    ?>
 
     <br>
     <label><strong>Other credentials</strong></label>

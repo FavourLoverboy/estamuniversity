@@ -193,7 +193,26 @@
                     move_uploaded_file($_FILES['passport']['tmp_name'], $location);
                 }
 
-                $tblquery = "UPDATE students SET regno = :regno, lname = :lname, fname = :fname, mname = :mname, sex = :sex, dob = :dob, state = :state, lga = :lga, nationality = :nationality, num = :num, email = :email, password = :password, c_address = :c_address, c_city = :c_city, c_state = :c_state, c_country = :c_country, degree = :degree, course = :course, mol = :mol, level = :level, session = :session, passport = :passport, files = :files WHERE id = :id";
+                // getting additional field value
+                $allFields = array();
+                $tblquery = "SELECT * FROM morefields WHERE type = :type";
+                $tblvalue = array(
+                    ':type' => 'S'
+                );
+                $select = $connect->tbl_select($tblquery,$tblvalue);
+                foreach($select as $data){
+                    extract($data);
+                    array_push($allFields, $name); 
+                }
+
+                $allMore = '';
+                foreach($allFields as $data){
+                    $a = "$data";
+                    $allMore .= htmlspecialchars(ucfirst($$a) . '?* ');
+                }
+                $allMore = rtrim($allMore, "?* ");
+
+                $tblquery = "UPDATE students SET regno = :regno, lname = :lname, fname = :fname, mname = :mname, sex = :sex, dob = :dob, state = :state, lga = :lga, nationality = :nationality, num = :num, email = :email, password = :password, c_address = :c_address, c_city = :c_city, c_state = :c_state, c_country = :c_country, degree = :degree, course = :course, mol = :mol, level = :level, session = :session, passport = :passport, files = :files, more = :more WHERE id = :id";
                 
                 if(!$newFiles){
                     $totalValue = sizeof($credentials);
@@ -227,6 +246,7 @@
                     ':session' => htmlspecialchars($session),
                     ':passport' => htmlspecialchars($passPassport),
                     ':files' => $newFiles,
+                    ':more' => $allMore,
                     ':id' => $_SESSION['stu_id']
                 );
                 $update = $connect->tbl_update($tblquery,$tblvalue);
@@ -493,9 +513,56 @@
                 <small style="display: block;">WAEC RESULT, LGA IDENTIFICATION, BIRTH CERTIFICATE/AGE DECLARATION</small>
                 <small style="display: block;">Accepted file types: jpg, jpeg, png, Max. file size: 100 MB, Max. files: 10</small>
             </div>
-            
+        </div>
+        
+        <?php
+            $tblquery = "SELECT * FROM morefields WHERE type = :type";
+            $tblvalue = array(
+                ':type' => 'S'
+            );
+            $select = $connect->tbl_select($tblquery,$tblvalue);
+            if($select){
+                echo "<br><small><strong>Others</strong></small>";
+            }
+        ?>
+        
+        <div class="row">
+            <?php
+                
+                if($select){
+                    $i = 0;
+                    foreach($select as $data){
+                        extract($data);
+                        if(!$enter){
+                            $a = "$name";
+                            $abc = $$a;
+                        }
+                        
+                        echo "
+                            <div class='col-lg-3'>
+                                $content <br/>
+                        ";
+                            $tblquery = "SELECT more FROM students WHERE id = :id";
+                            $tblvalue = array(
+                                ':id' => $_SESSION['stu_id']
+                            );
+                            $selects = $connect->tbl_select($tblquery,$tblvalue);
+                            foreach($selects as $date){
+                                extract($date);
+                                $moreFields = explode('?* ', $more);
+                                echo "
+                                    <input type='text' name='$name' value='$moreFields[$i]' class='form-control'>
+                                ";
+                            }
+                        echo"
+                            </div>
+                        ";
+                        $i++;  
+                    }
+                }
+            ?>    
             <div class="col-lg-3">
-                <br><br>
+                <br>
                 <input type="submit" name="submit" value="Update" class="btn btn-primary">
             </div>
         </div>
