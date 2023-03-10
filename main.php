@@ -13,27 +13,27 @@
     $student = 'student';
 
     if($_SESSION['level'] == 'SUA'){
-        // include('includes/titles/suparadmin.php');
+        include('includes/titles/suparadmin.php');
         if($url[0] != $superAdmin){
             header("location: /$dir/$superAdmin/dashboard");
         }
     }elseif($_SESSION['level'] == 'SA'){
-        // include('includes/titles/studentadmin.php');
+        include('includes/titles/studentadmin.php');
         if($url[0] != $studentAdmin){
             header("location: /$dir/$studentAdmin/dashboard");
         }
     }elseif($_SESSION['level'] == 'PA'){
-        // include('includes/titles/paymentadmin.php');
+        include('includes/titles/paymentadmin.php');
         if($url[0] != $paymentAdmin){
             header("location: /$dir/$paymentAdmin/dashboard");
         }
     }elseif($_SESSION['level'] == 'RA'){
-        // include('includes/titles/resultadmin.php');
+        include('includes/titles/resultadmin.php');
         if($url[0] != $resultAdmin){
             header("location: /$dir/$resultAdmin/dashboard");
         }
     }else{
-        // include('includes/titles/student.php');
+        include('includes/titles/student.php');
         if($url[0] != $student){
             header("location: /$dir/$student/dashboard");
         }
