@@ -9,7 +9,7 @@
                         <a href='editstudent' class='btn btn-warning'>Edit student details</a>
                     </div>
                     <div class='col-3'>
-                        <a onclick='delete()' class='btn btn-danger'>Delete</a>
+                        <a onclick='toggle()' class='btn btn-danger'>Delete</a>
                     </div>
                 ";
             }
@@ -30,22 +30,6 @@
         
         ?>
         
-        <script>
-
-            function(){
-
-            }
-
-        </script>
-        <?php
-            // $_SESSION['stu_id'];
-            // $ids = '';
-            // $tblquery = "DELETE FROM students WHERE id = :id";
-            // $tblvalue = array(
-            //     ':id' => $ids
-            // );
-            // $delete = $connect->tbl_delete($tblquery,$tblvalue);
-        ?>
     </div>
 
     <hr>

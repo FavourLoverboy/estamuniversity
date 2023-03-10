@@ -23,3 +23,13 @@ toggleSidebar.addEventListener("click", () => {
 logo.addEventListener("click", () => {
     sidebar.classList.toggle("close");
 });
+
+// delete popup
+function toggle(){
+    var sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('blur');
+    var home = document.querySelector('.home');
+    home.classList.toggle('blur');
+    var popup = document.querySelector('#popup');
+    popup.classList.toggle('active');
+}

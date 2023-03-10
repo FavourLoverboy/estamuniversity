@@ -55,4 +55,33 @@
             </div>
         </div>
     </section>
+    <div id="popup">
+        <h5>Notice</h5>
+        <p><?php echo 'are you sure you want to delete ' . $_SESSION['stu_name']; ?></p>
+        <div class="row">
+            <div class="col-lg-2">
+                <a class="btn btn-primary" onclick="toggle()">Close</a>
+            </div>
+            <div class="col-lg-8">
+                
+            </div>
+            <div class="col-lg-2">
+                <form action="" method="post">
+                    <input class="btn btn-danger" type="submit" name= "delete" value="Confirm">
+                </form>
+                <?php
+                    if($_POST['delete']){
+                        extract($_POST);
+                        
+                        $tblquery = "DELETE FROM students WHERE id = :id";
+                        $tblvalue = array(
+                            ':id' => $_SESSION['stu_id']
+                        );
+                        $delete = $connect->tbl_delete($tblquery,$tblvalue);
+                        echo "<script>  window.location='students' </script>";
+                    }
+                ?>
+            </div>
+        </div>
+    </div>
 <?php include ('includes/main/footer.php'); ?>

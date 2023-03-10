@@ -37,6 +37,11 @@ span.main{
 .sidebar.close{
     width: 78px;
 }
+.sidebar.blur{
+    filter: blur(1px);
+    position: none;
+    user-select: none;
+}
 .logo-box{
     align-items: center;
     color: var(--color_Light1);
@@ -186,6 +191,11 @@ span.main{
 .sidebar.close ~ .home{
     left: 78px;
     width: calc(100% - 78px);
+}
+.home.blur{
+    filter: blur(1px);
+    position: none;
+    user-select: none;
 }
 .home .toggle-sidebar{
     align-items: center;
@@ -482,7 +492,26 @@ span.main{
 /* end dashboard */
 
 
-
+/* popup */
+#popup{
+    background: #fff;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, .30);
+    left: 50%;
+    opacity: 0;
+    padding: 50px;
+    position: fixed;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
+    visibility: hidden;
+    width: 600px;
+}
+#popup.active{
+    opacity: 1;
+    top: 50%;
+    transition: 0.5s;
+    visibility: visible;
+}
 
 
 
