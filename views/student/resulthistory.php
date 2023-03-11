@@ -67,7 +67,7 @@
                                     array_push($addEmail, $email);
                                 }
 
-                                $tblquery = "SELECT  course FROM students WHERE id = :id";
+                                $tblquery = "SELECT course FROM students WHERE id = :id";
                                 $tblvalue = array(
                                     ':id' => htmlspecialchars($userid)
                                 );
