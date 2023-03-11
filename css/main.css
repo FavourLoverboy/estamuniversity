@@ -369,7 +369,7 @@ span.main{
     display: flex;
     justify-content: space-between;
 }
-.cardHeader h2{
+.cardHeader h5{
     color: var(--blue);
     font-weight: 600;
 }

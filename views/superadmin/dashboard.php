@@ -20,42 +20,82 @@
     <div class="cardBox">
         <div class="card">
             <div>
-                <div class="numbers">1,504</div>
-                <div class="cardName">Daily Views</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="eye-outline"></ion-icon>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Sales</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers">284</div>
-                <div class="cardName">Comments</div>
-            </div>
-
-            <div class="iconBx">
-                <ion-icon name="chatbubbles-outline"></ion-icon>
+                <?php
+                    
+                    $tblquery = "SELECT count(id) as allStudent FROM students";
+                    $tblvalue = array();
+                    $select = $connect->tbl_select($tblquery,$tblvalue);
+                    foreach($select as $data){
+                        extract($data);
+                        $num = number_format($allStudent);
+                        echo "
+                            <div class='numbers'>$num</div>
+                        ";
+                    }
+                
+                ?>
+                <div class="cardName">Students</div>
             </div>
         </div>
         <div class="card">
             <div>
-                <div class="numbers">7,842</div>
-                <div class="cardName">Learning</div>
+                <?php
+                    
+                    $tblquery = "SELECT count(id) as allCourse FROM additional_details WHERE type = :type";
+                    $tblvalue = array(
+                        ':type' => 'Course'
+                    );
+                    $select = $connect->tbl_select($tblquery,$tblvalue);
+                    foreach($select as $data){
+                        extract($data);
+                        $num = number_format($allCourse);
+                        echo "
+                            <div class='numbers'>$num</div>
+                        ";
+                    }
+                
+                ?>
+                <div class="cardName">Courses</div>
             </div>
-
-            <div class="iconBx">
-                <ion-icon name="cash-outline"></ion-icon>
+        </div>
+        <div class="card">
+            <div>
+                <?php
+                    
+                    $tblquery = "SELECT count(id) as allCourse FROM additional_details WHERE type = :type";
+                    $tblvalue = array(
+                        ':type' => 'Degree'
+                    );
+                    $select = $connect->tbl_select($tblquery,$tblvalue);
+                    foreach($select as $data){
+                        extract($data);
+                        $num = number_format($allCourse);
+                        echo "
+                            <div class='numbers'>$num</div>
+                        ";
+                    }
+                
+                ?>
+                <div class="cardName">Degrees</div>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <?php
+                    
+                    $tblquery = "SELECT count(id) as allStaff FROM staff";
+                    $tblvalue = array();
+                    $select = $connect->tbl_select($tblquery,$tblvalue);
+                    foreach($select as $data){
+                        extract($data);
+                        $num = number_format($allStaff);
+                        echo "
+                            <div class='numbers'>$num</div>
+                        ";
+                    }
+                
+                ?>
+                <div class="cardName">Staffs</div>
             </div>
         </div>
     </div>
@@ -64,84 +104,48 @@
     <div class="details">
         <div class="recentOrders">
             <div class="cardHeader">
-                <h2>Recent Orders</h2>
-                <a href="#" class="btn">View All</a>
+                <h5>Recent payments</h5>
+                <a href="paymenthistory" class="btn">View All</a>
             </div>
 
             <table>
                 <thead>
                     <tr>
                         <td>Name</td>
+                        <td>Item</td>
+                        <td>Level</td>
                         <td>Price</td>
-                        <td>Payment</td>
-                        <td>Status</td>
+                        <td>Amount</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Star Refrigator</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td>
-                            <span class="status delivered">Delivered</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Dell Laptop</td>
-                        <td>$110</td>
-                        <td>Due</td>
-                        <td>
-                            <span class="status pending">Pending</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Apple Watch</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td>
-                            <span class="status return">Return</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Adidas Shoes</td>
-                        <td>$620</td>
-                        <td>Due</td>
-                        <td>
-                            <span class="status inProgress">In Progress</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Star Refrigator</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td>
-                            <span class="status delivered">Delivered</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Dell Laptop</td>
-                        <td>$110</td>
-                        <td>Due</td>
-                        <td>
-                            <span class="status pending">Pending</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Apple Watch</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td>
-                            <span class="status return">Return</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Adidas Shoes</td>
-                        <td>$620</td>
-                        <td>Due</td>
-                        <td>
-                            <span class="status inProgress">In Progress</span>
-                        </td>
-                    </tr>
+                    <?php
+                    
+                        $tblquery = "SELECT * FROM payment ORDER BY id DESC LIMIT 10";
+                        $tblvalue = array();
+                        $select = $connect->tbl_select($tblquery,$tblvalue);
+                        foreach($select as $data){
+                            extract($data);
+                            $tblquery = "SELECT * FROM students WHERE id = :id";
+                            $tblvalue = array(
+                                ':id' => $stu_id
+                            );
+                            $select2 = $connect->tbl_select($tblquery,$tblvalue);
+                            foreach($select2 as $data2){
+                                extract($data2);
+                            }
+                            echo "
+                                <tr>
+                                    <td>$lname $fname $mname</td>
+                                    <td>$item</td>
+                                    <td>$level</td>
+                                    <td>$pm</td>
+                                    <td>$amount</td>
+                                </tr>
+                            ";
+                        }
+                    
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -149,90 +153,32 @@
         <!-- New Customers -->
         <div class="recentCustomers">
             <div class="cardHeader">
-                <h2>Recent Customers</h2>
+                <h5>Recent Students</h5>
             </div>
 
             <table>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="img/img.png" alt="">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="img/img.png" alt="">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="img/img.png" alt="">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="img/img.png" alt="">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="img/img.png" alt="">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="img/img.png" alt="">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="img/img.png" alt="">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="img/img.png" alt="">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
+                <?php
+                    
+                    $tblquery = "SELECT * FROM students ORDER BY id DESC LIMIT 8";
+                    $tblvalue = array();
+                    $select = $connect->tbl_select($tblquery,$tblvalue);
+                    foreach($select as $data){
+                        extract($data);
+                        echo "
+                            <tr>
+                                <td width='60px'>
+                                    <div class='imgBx'>
+                                        <img src='../uploads/$folder/$passport' alt='Image'>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h4>$lname $fname $mname <br> <span>$course</span></h4>
+                                </td>
+                            </tr>
+                        ";
+                    }
+                
+                ?>
             </table>
         </div>
     </div>
