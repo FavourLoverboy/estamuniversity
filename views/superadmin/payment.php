@@ -141,7 +141,7 @@
                     echo "
                         <div class='col-lg-3'>
                             $content <br/>
-                            <input type='text' name='$name' value='$abc' class='form-control'>
+                            <input type='text' name='$name' value='$abc' class='form-control' required>
                         </div>
                     ";    
                 }
@@ -193,7 +193,8 @@
                             }
                         
                         ?> 
-                        <th>Date</th>
+                        <th>Date</th>     
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -252,6 +253,12 @@
                                     
                                 echo "
                                         <td>$date</td>
+                                        <td>
+                                            <form action='' method='post'>
+                                                <input type='hidden' name='score_id' value='$id'>
+                                                <input type='submit' name='rem' class='btn btn-sm btn-info' value='remove'>
+                                            </form>
+                                        </td>
                                     </tr>
                                 ";
                                 $sn++;
@@ -272,3 +279,16 @@
         </div>
     </div>
 </div>
+<?php
+
+    if($_POST['rem']){
+        extract($_POST);
+        $tblquery = "DELETE FROM payment WHERE id = :id";
+        $tblvalue = array(
+            ':id' => $score_id
+        );
+        $delete = $connect->tbl_delete($tblquery,$tblvalue);
+        echo "<script>  window.location='payment' </script>";
+    }
+
+?>

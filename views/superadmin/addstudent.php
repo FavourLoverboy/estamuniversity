@@ -456,7 +456,7 @@
                         echo "
                             <div class='col-lg-3'>
                                 $content <br/>
-                                <input type='text' name='$name' value='$abc' class='form-control'>
+                                <input type='text' name='$name' value='$abc' class='form-control' required>
                             </div>
                         ";    
                     }
