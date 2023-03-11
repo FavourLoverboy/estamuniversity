@@ -14,6 +14,8 @@
     
     ?>
 
+    <h5>Welcome <?php echo $lname . ' ' . $fname . ' ' . $mname; ?></h5>
+    <br>
     <div class="row">
         <div class="col-3">
             <img src='../uploads/<?php echo $folder . '/' . $passport; ?>' style="height: 300px; width:200px; border-radius:5px;">
