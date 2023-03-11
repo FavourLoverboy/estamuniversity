@@ -78,6 +78,28 @@
                             ':id' => $_SESSION['stu_id']
                         );
                         $delete = $connect->tbl_delete($tblquery,$tblvalue);
+
+                        // array_map('unlink', glob("../uploads/$_SESSION[stu_folder]/*.*"));
+                        // rmdir("../uploads/$_SESSION[stu_folder]");
+
+                        
+
+                        function xrmdir($dir) {
+                            $items = scandir($dir);
+                            foreach ($items as $item) {
+                                if ($item === '.' || $item === '..') {
+                                    continue;
+                                }
+                                $path = $dir.'/'.$item;
+                                if (is_dir($path)) {
+                                    xrmdir($path);
+                                } else {
+                                    unlink($path);
+                                }
+                            }
+                            rmdir($dir);
+                        }
+                        xrmdir("uploads/$_SESSION[stu_folder]");
                         echo "<script>  window.location='students' </script>";
                     }
                 ?>
@@ -85,3 +107,4 @@
         </div>
     </div>
 <?php include ('includes/main/footer.php'); ?>
+<!-- $_SESSION['stu_folder'] -->
