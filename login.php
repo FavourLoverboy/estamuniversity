@@ -42,8 +42,6 @@
                                 extract($data);
                                 $_SESSION['myId'] = $id;
                                 $_SESSION['email'] = $email;
-                                $_SESSION['name'] = $name;
-                                $_SESSION['level'] = $level;
         
                                 echo "<script>  window.location='student/dashboard' </script>";
                             }

@@ -18,7 +18,7 @@
                 }else if($_SESSION['level'] == 'RA'){
                     include('levels/resultadmin.php');
                 }else{
-                    include('level/member.php');
+                    include('levels/student.php');
                 }
             ?>
             <li>
