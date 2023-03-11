@@ -241,7 +241,6 @@
                         <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>Added By</th>
                                 <th>Item</th>
                                 <th>Amount</th>
                                 <th>Method</th>
@@ -283,18 +282,8 @@
                                 );
                                 $select = $connect->tbl_select($tblquery,$tblvalue);
                                 if($select){
-                                    $addEmail = array();
                                     foreach($select as $data){
                                         extract($data);
-                                        $tblquery = "SELECT * FROM staff WHERE id = :id";
-                                        $tblvalue = array(
-                                            ':id' => htmlspecialchars($addedby)
-                                        );
-                                        $sear = $connect->tbl_select($tblquery, $tblvalue);
-                                        foreach($sear as $data){
-                                            extract($data);
-                                            array_push($addEmail, $email);
-                                        }
                                     }
                                 }
                                 if($select){
@@ -306,7 +295,6 @@
                                         echo "
                                             <tr>
                                                 <td>$sn</td>
-                                                <td>$addEmail[$snE]</td>
                                                 <td>$item</td>
                                                 <td>$amount</td>
                                                 <td>$pm</td>
@@ -358,7 +346,6 @@
                         <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>Added By</th>
                                 <th>Title</th>    
                                 <th>Code</th>      
                                 <th>CU</th>   
@@ -402,18 +389,9 @@
                                 );
                                 $searches = $connect->tbl_select($tblquery, $tblvalue);
                                 if($searches){
-                                    $addEmail = array();
                                     foreach($searches as $data){
                                         extract($data);
-                                        $tblquery = "SELECT * FROM staff WHERE id = :id";
-                                        $tblvalue = array(
-                                            ':id' => htmlspecialchars($addedby)
-                                        );
-                                        $sear = $connect->tbl_select($tblquery, $tblvalue);
-                                        foreach($sear as $data){
-                                            extract($data);
-                                            array_push($addEmail, $email);
-                                        }
+                                        
                                     }
                                 }
                                 $se = '1st';
@@ -457,7 +435,6 @@
                                             echo "
                                                 <tr>
                                                     <td>$sn</td>
-                                                    <td>$addEmail[$seE]</td>
                                                     <td>$title</td>
                                                     <td>$code</td>
                                                     <td>$cu</td>
@@ -493,7 +470,6 @@
                                                 </tr>
                                                 <tr>
                                                     <td>$sn</td>
-                                                    <td>$addEmail[$seE]</td>
                                                     <td>$title</td>
                                                     <td>$code</td>
                                                     <td>$cu</td>
@@ -544,3 +520,4 @@
         </script>
     </body>
 </html>
+<?php //include('includes/main/footer.php'); ?>
